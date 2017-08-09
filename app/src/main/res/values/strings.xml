@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Todo List with Kotlin</string>
+    <string name="save">Salvar</string>
+    <string name="description">Descrição</string>
+    <string name="completed">Finalizado</string>
+    <string name="completeds">Finalizadas</string>
+    <string name="all">Todas</string>
+    <string name="active">Ativas</string>
+    <string name="clear_completed">Apagar finalizadas</string>
+    <string name="filter_by">Filtrar por</string>
+
+</resources>
