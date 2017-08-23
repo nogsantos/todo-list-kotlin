@@ -2,16 +2,15 @@ package fabricionogueira.site.todolistwithkotlin
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val todos : MutableList<Todo> by lazy { mutableListOf<Todo>() }
-    private var adapter : ArrayAdapter<Todo>? = null
+    private val todos: MutableList<Todo> by lazy { mutableListOf<Todo>() }
+    private var adapter: ArrayAdapter<Todo>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         listTodos.setOnItemClickListener { _, _, position, _ ->
-            showShortToast(this.todos[position].description)
+            //            showShortToast(this.todos[position].description)
         }
 
         adapter = ArrayAdapter<Todo>(this, android.R.layout.simple_list_item_1, this.todos)
@@ -32,11 +31,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_INSERT && resultCode == Activity.RESULT_OK){
-            Log.d("FNS", "request")
+        if (requestCode == REQUEST_INSERT && resultCode == Activity.RESULT_OK) {
             val todo = data?.getSerializableExtra(DetailActivity.EXTRA_TODO) as? Todo
-            if(todo != null){
-                Log.d("FNS", "not null")
+            if (todo != null) {
                 this.todos.add(todo)
                 adapter?.notifyDataSetChanged()
             }

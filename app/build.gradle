@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
+
+ext.app_version = '0.1.0';
+ext.app_name = 'Todo List Kotlin';
+ext.shared_name = '9283257b41d3f3a310e4107ca4457dd0ed2098fd';
 
 android {
     compileSdkVersion 25
@@ -10,12 +15,33 @@ android {
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "$app_version"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+
+    dataBinding {
+        enabled true
+    }
+
     buildTypes {
+
+        debug {
+            buildConfigField "String", "version", "\"$app_version\""
+            buildConfigField "String", "environment", "\"dev\""
+            buildConfigField "String", "shared_name", "\"$shared_name\""
+            buildConfigField "boolean", "LOG", "true"
+            buildConfigField "String", "aplication_name", "\"$app_name Dev\""
+            resValue "string", "app_name", "\"$app_name Dev\""
+        }
+
         release {
+            buildConfigField "String", "version", "\"$app_version\""
+            buildConfigField "String", "environment", "\"prod\""
+            buildConfigField "String", "shared_name", "\"$shared_name\""
+            buildConfigField "boolean", "LOG", "false"
+            buildConfigField "String", "aplication_name", "\"$app_name\""
+            resValue "string", "app_name", "\"$app_name\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -32,6 +58,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.3.1'
+    compile 'javax.inject:javax.inject:1'
 }
 repositories {
     mavenCentral()

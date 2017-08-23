@@ -15,9 +15,12 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         btnSave.setOnClickListener {
-            val description = edtDescription.text.toString()
-            Log.d("FNS", description)
-            val todo = Todo(description, false)
+            val todo = Todo()
+            todo.description = edtDescription.text.toString()
+            todo.completed = false
+
+            val dao = TodoDao()
+            dao.cadastrar(todo)
 
             val intent = Intent()
             intent.putExtra(EXTRA_TODO, todo)
